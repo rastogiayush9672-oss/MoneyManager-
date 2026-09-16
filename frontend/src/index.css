@@ -1,0 +1,92 @@
+body {
+    background-color: #0d0d0d !important;
+    color: #ffffff !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Override Bootstrap Cards */
+.card {
+    background-color: #1a1a1a !important;
+    border: 1px solid #2d2d2d !important;
+    border-radius: 20px !important;
+    color: #ffffff !important;
+}
+
+/* Custom Text Colors */
+.text-muted {
+    color: #888888 !important;
+}
+.text-dark {
+    color: #ffffff !important; /* Invert dark text */
+}
+.text-primary {
+    color: #f5b041 !important; /* Gold accent */
+}
+.bg-primary {
+    background-color: #f5b041 !important;
+    color: #0d0d0d !important;
+}
+.btn-primary {
+    background-color: #f5b041 !important;
+    border-color: #f5b041 !important;
+    color: #000000 !important;
+    font-weight: 600 !important;
+}
+.btn-primary:hover {
+    background-color: #d49a36 !important;
+    border-color: #d49a36 !important;
+}
+
+/* Inputs and Forms */
+.form-control, .form-select {
+    background-color: #262626 !important;
+    border: 1px solid #333333 !important;
+    color: #ffffff !important;
+}
+.form-control::placeholder {
+    color: #666666 !important;
+}
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(245, 176, 65, 0.25) !important;
+    border-color: #f5b041 !important;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #111111 !important;
+    border-bottom: 1px solid #2d2d2d !important;
+}
+
+/* Badges */
+.badge.bg-light {
+    background-color: #262626 !important;
+    color: #fff !important;
+    border: 1px solid #444 !important;
+}
+
+/* Table */
+.table {
+    color: #fff !important;
+    background-color: transparent !important;
+}
+.table-light th {
+    background-color: #1a1a1a !important;
+    color: #888 !important;
+    border-bottom: 1px solid #333 !important;
+}
+.table td {
+    border-bottom: 1px solid #222 !important;
+}
+.table-hover tbody tr:hover {
+    background-color: #222 !important;
+    color: #fff !important;
+}
+
+/* Modals */
+.modal-content {
+    background-color: #1a1a1a !important;
+    border: 1px solid #333 !important;
+}
+.modal-header {
+    border-bottom: 1px solid #333 !important;
+}
