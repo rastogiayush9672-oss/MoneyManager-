@@ -1,92 +1,426 @@
-body {
-    background-color: #0d0d0d !important;
-    color: #ffffff !important;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+/* =========================================================
+   MONEYMANAGER ENTERPRISE DESIGN SYSTEM & THEME TOKENS
+   Deep Navy / Midnight Blue Fintech Palette (Stripe/Linear Inspired)
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Accent Colors (Consistent across themes) */
+  --color-primary: #3b82f6;        /* Royal Indigo / Blue */
+  --color-primary-hover: #2563eb;
+  --color-primary-glow: rgba(59, 130, 246, 0.25);
+  
+  --color-accent: #8b5cf6;         /* Violet */
+  --color-accent-hover: #7c3aed;
+  
+  --color-success: #10b981;        /* Emerald Green */
+  --color-success-bg: rgba(16, 185, 129, 0.12);
+  --color-warning: #f59e0b;        /* Amber */
+  --color-warning-bg: rgba(245, 158, 11, 0.12);
+  --color-danger: #ef4444;         /* Soft Red */
+  --color-danger-bg: rgba(239, 68, 68, 0.12);
+  --color-info: #06b6d4;           /* Cyan */
+  --color-info-bg: rgba(6, 182, 212, 0.12);
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-full: 9999px;
+  
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Override Bootstrap Cards */
-.card {
-    background-color: #1a1a1a !important;
-    border: 1px solid #2d2d2d !important;
-    border-radius: 20px !important;
-    color: #ffffff !important;
+/* =========================================================
+   DARK THEME (Default: Deep Midnight Navy)
+   ========================================================= */
+:root[data-theme="dark"], body.theme-dark {
+  --bg-app: #080d1a;              /* Deepest midnight navy */
+  --bg-sidebar: #0b1329;          /* Deep navy */
+  --bg-card: #0f1b38;             /* Midnight card background */
+  --bg-card-hover: #142247;
+  --bg-surface: #132247;          /* Elevated surface */
+  --bg-input: #0a1124;
+  --bg-dropdown: #0f1b38;
+  --bg-modal: #0d1730;
+  
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.16);
+  --border-focus: #3b82f6;
+  
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-secondary: #cbd5e1;
+  --text-dim: #64748b;
+  
+  --glass-bg: rgba(15, 27, 56, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 12px -1px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.2);
+  
+  --chart-grid: rgba(255, 255, 255, 0.05);
+  --chart-text: #94a3b8;
 }
 
-/* Custom Text Colors */
+/* =========================================================
+   LIGHT THEME (Crisp Clean Fintech SaaS)
+   ========================================================= */
+:root[data-theme="light"], body.theme-light {
+  --bg-app: #f8fafc;              /* Slate-50 */
+  --bg-sidebar: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-surface: #f1f5f9;          /* Slate-100 */
+  --bg-input: #ffffff;
+  --bg-dropdown: #ffffff;
+  --bg-modal: #ffffff;
+  
+  --border-color: #e2e8f0;        /* Slate-200 */
+  --border-hover: #cbd5e1;        /* Slate-300 */
+  --border-focus: #3b82f6;
+  
+  --text-main: #0f172a;           /* Slate-900 */
+  --text-muted: #64748b;          /* Slate-500 */
+  --text-secondary: #334155;      /* Slate-700 */
+  --text-dim: #94a3b8;
+  
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(226, 232, 240, 0.8);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px -1px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.15);
+  
+  --chart-grid: rgba(0, 0, 0, 0.06);
+  --chart-text: #64748b;
+}
+
+/* =========================================================
+   BASE STYLES
+   ========================================================= */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-dim);
+}
+
+/* Links */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* Typography Helpers */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  margin-top: 0;
+}
+
 .text-muted {
-    color: #888888 !important;
+  color: var(--text-muted) !important;
 }
-.text-dark {
-    color: #ffffff !important; /* Invert dark text */
+.text-main {
+  color: var(--text-main) !important;
 }
-.text-primary {
-    color: #f5b041 !important; /* Gold accent */
+.text-secondary-c {
+  color: var(--text-secondary) !important;
 }
-.bg-primary {
-    background-color: #f5b041 !important;
-    color: #0d0d0d !important;
+
+/* Number / Currency styling */
+.font-mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum";
 }
+
+/* =========================================================
+   CARDS & CONTAINERS
+   ========================================================= */
+.card, .glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  color: var(--text-main);
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.glass-card {
+  backdrop-filter: blur(12px);
+  background: var(--glass-bg);
+  border-color: var(--glass-border);
+}
+
+/* Stat Card */
+.stat-card {
+  padding: 1.25rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: transparent;
+  transition: background var(--transition-fast);
+}
+.stat-card.accent-blue::before { background: var(--color-primary); }
+.stat-card.accent-emerald::before { background: var(--color-success); }
+.stat-card.accent-amber::before { background: var(--color-warning); }
+.stat-card.accent-violet::before { background: var(--color-accent); }
+.stat-card.accent-red::before { background: var(--color-danger); }
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+.btn {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  padding: 0.55rem 1.15rem;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
 .btn-primary {
-    background-color: #f5b041 !important;
-    border-color: #f5b041 !important;
-    color: #000000 !important;
-    font-weight: 600 !important;
+  background: linear-gradient(135deg, var(--color-primary) 0%, #2563eb 100%);
+  color: #ffffff !important;
+  border: none;
+  box-shadow: 0 2px 8px var(--color-primary-glow);
 }
 .btn-primary:hover {
-    background-color: #d49a36 !important;
-    border-color: #d49a36 !important;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  box-shadow: 0 4px 14px var(--color-primary-glow);
+  transform: translateY(-1px);
+  color: #ffffff !important;
 }
 
-/* Inputs and Forms */
+.btn-outline-custom {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+}
+.btn-outline-custom:hover {
+  background: var(--bg-surface);
+  border-color: var(--border-hover);
+  color: var(--text-main);
+}
+
+.btn-soft-primary {
+  background: var(--color-primary-glow);
+  color: var(--color-primary);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+.btn-soft-primary:hover {
+  background: rgba(59, 130, 246, 0.3);
+  color: var(--color-primary);
+}
+
+/* =========================================================
+   FORMS & INPUTS
+   ========================================================= */
 .form-control, .form-select {
-    background-color: #262626 !important;
-    border: 1px solid #333333 !important;
-    color: #ffffff !important;
+  background-color: var(--bg-input) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-main) !important;
+  border-radius: var(--radius-md);
+  padding: 0.6rem 0.9rem;
+  font-family: var(--font-sans);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
+
 .form-control::placeholder {
-    color: #666666 !important;
-}
-.form-control:focus {
-    box-shadow: 0 0 0 0.25rem rgba(245, 176, 65, 0.25) !important;
-    border-color: #f5b041 !important;
+  color: var(--text-dim) !important;
 }
 
-/* Navbar */
-.navbar {
-    background-color: #111111 !important;
-    border-bottom: 1px solid #2d2d2d !important;
+.form-control:focus, .form-select:focus {
+  border-color: var(--border-focus) !important;
+  box-shadow: 0 0 0 3px var(--color-primary-glow) !important;
+  outline: none;
 }
 
-/* Badges */
-.badge.bg-light {
-    background-color: #262626 !important;
-    color: #fff !important;
-    border: 1px solid #444 !important;
+.form-label {
+  font-size: 0.825rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
 }
 
-/* Table */
+/* =========================================================
+   TABLES
+   ========================================================= */
 .table {
-    color: #fff !important;
-    background-color: transparent !important;
-}
-.table-light th {
-    background-color: #1a1a1a !important;
-    color: #888 !important;
-    border-bottom: 1px solid #333 !important;
-}
-.table td {
-    border-bottom: 1px solid #222 !important;
-}
-.table-hover tbody tr:hover {
-    background-color: #222 !important;
-    color: #fff !important;
+  color: var(--text-main) !important;
+  background-color: transparent !important;
+  margin-bottom: 0;
 }
 
-/* Modals */
-.modal-content {
-    background-color: #1a1a1a !important;
-    border: 1px solid #333 !important;
+.table th {
+  background-color: var(--bg-surface) !important;
+  color: var(--text-muted) !important;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--border-color) !important;
 }
+
+.table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color) !important;
+  vertical-align: middle;
+  background-color: transparent !important;
+  color: var(--text-main);
+}
+
+.table-hover tbody tr:hover td {
+  background-color: var(--bg-card-hover) !important;
+}
+
+/* =========================================================
+   BADGES & PILLS
+   ========================================================= */
+.badge-fintech {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.badge-fintech.success {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.badge-fintech.danger {
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.badge-fintech.warning {
+  background: var(--color-warning-bg);
+  color: var(--color-warning);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.badge-fintech.info {
+  background: var(--color-info-bg);
+  color: var(--color-info);
+  border: 1px solid rgba(6, 182, 212, 0.25);
+}
+
+.badge-fintech.neutral {
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+/* =========================================================
+   MODALS & DRAWERS
+   ========================================================= */
+.modal-content {
+  background-color: var(--bg-modal) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-xl) !important;
+  box-shadow: var(--shadow-lg);
+  color: var(--text-main);
+}
+
 .modal-header {
-    border-bottom: 1px solid #333 !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  padding: 1.25rem 1.5rem;
+}
+
+.modal-footer {
+  border-top: 1px solid var(--border-color) !important;
+  padding: 1rem 1.5rem;
+}
+
+/* =========================================================
+   ANIMATED SKELETON LOADER
+   ========================================================= */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-surface) 25%,
+    var(--bg-card-hover) 50%,
+    var(--bg-surface) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeletonLoading 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes skeletonLoading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Pulse animation */
+@keyframes subtlePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+.pulse-indicator {
+  animation: subtlePulse 2s infinite ease-in-out;
 }
